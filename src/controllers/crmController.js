@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
-
-import {ContactSchema} from "../models/crmModel";
+import { ContactSchema } from "../models/crmModel";
 
 var Contact = mongoose.model('Contact', ContactSchema);
 
@@ -19,7 +18,7 @@ export const addNewContact = async (req, res) => {
 
 export const getAllContacts = async (req, res) => {
     try {
-        var allContacts = await Contact.find({});
+        const allContacts = await Contact.find({});
         // res.send(allContacts);
         res.json(allContacts);
     } catch (err) {
@@ -41,9 +40,9 @@ export const getContactById = async (req, res) => {
 export const updateContactById = async (req, res) => {
     try {
         // var contact = await Contact.find({_id: req.params.contactId});
-        var contact = await Contact.findByIdAndUpdate(req.params.contactId, req.body, { new: true });
+        var contact = await Contact.findByIdAndUpdate(req.params.contactId, req.body, {new: true});
 
-        if(contact) {
+        if (contact) {
             res.json(contact);
         } else {
             res.json({message: `Contact with id ${req.params.contactId} was not found`});
@@ -60,7 +59,7 @@ export const deleteContactById = async (req, res) => {
         var contact = await Contact.findByIdAndDelete(req.params.contactId);
         // res.send(contact);
         // res.json(contact);
-        if(contact) {
+        if (contact) {
             res.json({message: `Contact with id: ${contact.id} was deleted successfully.`});
         } else {
             res.json({message: `Contact with id: ${req.params.contactId} was not found`});
